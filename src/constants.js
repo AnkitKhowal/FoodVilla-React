@@ -807,3 +807,5 @@
         subtype: "basic",
     },
 ];
+
+export const SWIGGY_URL = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.972866&lng=77.705453&page_type=DESKTOP_WEB_LISTING";
