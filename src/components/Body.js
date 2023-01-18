@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import React, { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../constants";
+import { Link } from "react-router-dom";
 
 function filterRestaurant(searchValue, restrautList) {
     console.log(searchValue);
@@ -20,8 +21,8 @@ const Body = () => {
     //Used to define a local variable and its setter function
 
     const [searchValue, setSearchValue] = useState("");
-    const [allRestaurantList, setAllRestaurantList] = useState();
-    const [filteredRestaurantList, setfilteredRestaurantList] = useState();
+    const [allRestaurantList, setAllRestaurantList] = useState([]);
+    const [filteredRestaurantList, setfilteredRestaurantList] = useState([]);
 
     console.log("Rendering");
 
@@ -41,7 +42,7 @@ const Body = () => {
     // if (!allRestaurantList) return null;
 
     // Conditional Rendering
-    return allRestaurantList?.length === 0? <Shimmer /> : 
+    return allRestaurantList?.length === 0 ? <Shimmer /> :
         <React.Fragment>
             <div className="search-bar">
                 <input type="text" className="search-input" placeholder="Search" value={searchValue} onChange={
@@ -58,11 +59,18 @@ const Body = () => {
             <div className="restaurant-list">{
                 (filteredRestaurantList?.length === 0) ? <h1>No Restaurant Found</h1> :
                     filteredRestaurantList?.map((restaurant) => {
-                        return <RestaurantCard {...restaurant.data} key={restaurant.data.id}></RestaurantCard>
+                        return (
+                            <Link
+                                to={"/restaurant/" + restaurant.data.id}
+                                key={restaurant.data.id}
+                            >
+                                <RestaurantCard {...restaurant.data}></RestaurantCard>
+                            </Link>
+                        )
                     })
             }</div>
         </React.Fragment>
-    ;
+        ;
 };
 
 export default Body;

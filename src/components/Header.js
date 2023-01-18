@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => {
   return (
@@ -12,6 +13,10 @@ const Title = () => {
   );
 };
 
+
+//A <Link> is an element that lets the user navigate to another page by clicking or tapping on it.
+// In react-router-dom, a <Link> renders an accessible <a> element with a real href that points to the resource it's linking to. 
+
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
@@ -19,10 +24,9 @@ const Header = () => {
       <Title />
       <div className="nav-items">
         <ul>
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/aboutUs">About Us</Link></li>
+          <li><Link to="/contactUs">Contact Us</Link></li>
           {isLoggedIn ? <button onClick={() => { setIsLoggedIn(false) }}>Log out</button> : <button onClick={() => setIsLoggedIn(true)}>Log In</button>}
           {console.log(isLoggedIn)};
         </ul>
