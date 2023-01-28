@@ -1,24 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { SWIGGY_MENU_URL, IMG_CDN_URL } from "../constants";
+import { IMG_CDN_URL } from "../constants";
 import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantDetail = () => {
 
     const { resId } = useParams();
-    const [restaurantDetail, setRestaurantDetail] = useState(null);
-
-    async function getRestaurantDetail() {
-        const data = await fetch(SWIGGY_MENU_URL + resId);
-        const restaurantData = await data.json();
-        console.log(Object.values(restaurantData.data.menu.items).map((element) => element.name));
-        setRestaurantDetail(restaurantData.data);
-    }
-
-    useEffect(() => {
-        console.log("restaurantId", resId);
-        getRestaurantDetail();
-    }, []);
+    const restaurantDetail = useRestaurant(resId);
 
     return !restaurantDetail ? <Shimmer /> :
         <div className="restaurant-detail">
@@ -31,9 +19,9 @@ const RestaurantDetail = () => {
                 <img src={IMG_CDN_URL + restaurantDetail.cloudinaryImageId}></img>
             </div>
             <div className="menu">
-            <ol>
-                {Object.values(restaurantDetail.menu.items).map((element) => <li>{element.name}</li>)}
-            </ol>
+                <ol>
+                    {Object.values(restaurantDetail.menu.items).map((element) => <li>{element.name}</li>)}
+                </ol>
 
             </div>
         </div>

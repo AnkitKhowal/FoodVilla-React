@@ -1,15 +1,25 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Body from "./components/Body";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import ErrorPage from "./components/ErrorPage";
 import RestaurantDetail from "./components/RestaurantDetail";
 import Profile from "./components/Profile";
 import Profile from "./components/ProfileClass";
+import Shimmer from "./components/Shimmer";
+
+
+//Code Splitting
+//Dynamic Import 
+//Chunking
+//Lazy Loading
+//On Demand Loading
+
+const Instamart = lazy(() => import('./components/Instamart'));
+const AboutUs = lazy(()=> import('./components/AboutUs'));
 
 
 // Plan you app first and then start writing you code
@@ -58,7 +68,7 @@ const router = createBrowserRouter([
       },
       {
         path: "aboutUs",
-        element: <AboutUs />,
+        element: <Suspense fallback={<h1>Loading ..</h1>}><AboutUs /></Suspense>,
         children: [{
           path: "profile",
           element: <Profile />
@@ -71,6 +81,12 @@ const router = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantDetail />
+      },
+      {
+        path: "/instamart",
+        element: <Suspense fallback={<Shimmer />}>
+          <Instamart />
+        </Suspense>
       },
     ]
   },

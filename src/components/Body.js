@@ -1,18 +1,10 @@
 import RestaurantCard from "./RestaurantCard";
 import React, { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
-import { SWIGGY_URL } from "../constants";
 import { Link } from "react-router-dom";
-
-function filterRestaurant(searchValue, restrautList) {
-    console.log(searchValue);
-    const data = restrautList.filter((restaurant) => {
-        return restaurant.data.name.toLowerCase().includes(searchValue.toLowerCase());
-    });
-    return data;
-};
-
-
+import { filterRestaurant } from "../utils/helper";
+import useRestaurantList from "../utils/useRestaurantList";
+import useIsOnline from "../utils/useIsOnline";
 
 const Body = () => {
 
@@ -21,22 +13,8 @@ const Body = () => {
     //Used to define a local variable and its setter function
 
     const [searchValue, setSearchValue] = useState("");
-    const [allRestaurantList, setAllRestaurantList] = useState([]);
     const [filteredRestaurantList, setfilteredRestaurantList] = useState([]);
-
-    console.log("Rendering");
-
-    async function getRestaurantList() {
-        let data = await fetch(SWIGGY_URL);
-        let jsonData = await data.json();
-        setAllRestaurantList(jsonData?.data?.cards[2]?.data?.data?.cards);
-        setfilteredRestaurantList(jsonData?.data?.cards[2]?.data?.data?.cards);
-    }
-
-    useEffect(() => {
-        console.log("Use effect called");
-        getRestaurantList();
-    }, []);
+    const allRestaurantList  = useRestaurantList(setfilteredRestaurantList);
 
     //Early Return 
     // if (!allRestaurantList) return null;
