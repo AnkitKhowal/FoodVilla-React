@@ -8,6 +8,8 @@ import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
 import ErrorPage from "./components/ErrorPage";
 import RestaurantDetail from "./components/RestaurantDetail";
+import Profile from "./components/Profile";
+import Profile from "./components/ProfileClass";
 
 
 // Plan you app first and then start writing you code
@@ -55,8 +57,12 @@ const router = createBrowserRouter([
         element: <Body />
       },
       {
-        path: "/aboutUs",
-        element: <AboutUs />
+        path: "aboutUs",
+        element: <AboutUs />,
+        children: [{
+          path: "profile",
+          element: <Profile />
+        }]
       },
       {
         path: "/contactUs",
