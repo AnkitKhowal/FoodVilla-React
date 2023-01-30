@@ -4,7 +4,7 @@ class Profile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            userInfo : {
+            userInfo: {
                 name: "Dummy Name",
                 location: "Dummy Location",
                 avatar_url: ""
@@ -17,8 +17,8 @@ class Profile extends React.Component {
         const data = await fetch("https://api.github.com/users/ankitkhowal");
         const profile = await data.json();
         this.setState({
-            userInfo : {
-                name : profile.name,
+            userInfo: {
+                name: profile.name,
                 location: profile.location,
                 avatar_url: profile.avatar_url
             }
@@ -26,10 +26,10 @@ class Profile extends React.Component {
 
     }
 
-    componentDidUpdate(){
+    componentDidUpdate() {
         console.log("Child - componentDidUpdate");
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         console.log("Child - componentWillUnmount");
     }
 
@@ -38,12 +38,13 @@ class Profile extends React.Component {
         console.log("Child - Render" + this.props.lastName);
         return (
             <>
-                <div>
-                    <h1>Name : {this.state.userInfo.name}</h1>
-                    <h1>Location : {this.state.userInfo.location}</h1>
+                <div className="flex justify-center">
                     <img src={this.state.userInfo.avatar_url}></img>
-
-                    <button onClick={() => {
+                    <div className="font-bold text-lg p-10 m-10">
+                        <h1 >Name : {this.state.userInfo.name}</h1>
+                        <h1>Location : {this.state.userInfo.location}</h1>
+                    </div>
+                    <button className = "invisible"onClick={() => {
                         // We do not mutate state directly
                         // Never do this.state.count1 =1
                         //Because react  will not be able to keep track of the state

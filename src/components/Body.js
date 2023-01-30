@@ -22,19 +22,19 @@ const Body = () => {
     // Conditional Rendering
     return allRestaurantList?.length === 0 ? <Shimmer /> :
         <React.Fragment>
-            <div className="search-bar">
-                <input type="text" className="search-input" placeholder="Search" value={searchValue} onChange={
+            <div className="search-bar p-5 bg-pink-50 my-5">
+                <input type="text" className="search-input focus:bg-green-200 p-2 m-2" placeholder="Search" value={searchValue} onChange={
                     (event) => {
                         setSearchValue(event.target.value);
                     }
                 }></input>
-                <button id="search-btn" onClick={(event) => {
+                <button id="search-btn" className= "p-2 m-2 bg-purple-400 text-white rounded-md hover:bg-gray-500" onClick={(event) => {
                     const data = filterRestaurant(searchValue, allRestaurantList);
                     setfilteredRestaurantList(data);
                 }
                 }>Search</button>
             </div>
-            <div className="restaurant-list">{
+            <div className="restaurant-list flex flex-wrap">{
                 (filteredRestaurantList?.length === 0) ? <h1>No Restaurant Found</h1> :
                     filteredRestaurantList?.map((restaurant) => {
                         return (

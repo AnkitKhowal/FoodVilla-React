@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useIsOnline from "../utils/useIsOnline";
+import { LOGO } from "../constants";
 
 const Title = () => {
   return (
     <a href="/">
       <img
-        className="logo"
-        src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
+        className="h-28 p-2"
+        src={LOGO}
         alt="logo"
       ></img>
     </a>
@@ -22,17 +23,17 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isOnline = useIsOnline();
   return (
-    <div className="header">
+    <div className="flex justify-between bg-pink-50 shadow-lg">
       <Title />
       <div className="nav-items">
-        <h1>{isOnline ? '✅' : '🛑'}</h1>
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/aboutUs">About Us</Link></li>
-          <li><Link to="/contactUs">Contact Us</Link></li>
-          <li><Link to="/instamart">Instamart</Link></li>
-          {isLoggedIn ? <button onClick={() => { setIsLoggedIn(false) }}>Log out</button> : <button onClick={() => setIsLoggedIn(true)}>Log In</button>}
-          {console.log(isLoggedIn)};
+
+        <ul className="flex py-10">
+          <li>Status {isOnline ? '✅' : '🛑'}</li>
+          <li className="px-2"><Link to="/">Home</Link></li>
+          <li className="px-2"><Link to="/aboutUs">About Us</Link></li>
+          <li className="px-2"><Link to="/contactUs">Contact Us</Link></li>
+          <li className="px-2"><Link to="/instamart">Instamart</Link></li>
+          {isLoggedIn ? <button className="border bg-green-400" onClick={() => { setIsLoggedIn(false) }}>Log out</button> : <button className="border bg-red-400" onClick={() => setIsLoggedIn(true)}>Log In</button>}
         </ul>
       </div>
     </div>
