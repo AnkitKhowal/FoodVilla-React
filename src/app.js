@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -10,6 +10,7 @@ import RestaurantDetail from "./components/RestaurantDetail";
 import Profile from "./components/Profile";
 import Profile from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 
 //Code Splitting
@@ -19,7 +20,7 @@ import Shimmer from "./components/Shimmer";
 //On Demand Loading
 
 const Instamart = lazy(() => import('./components/Instamart'));
-const AboutUs = lazy(()=> import('./components/AboutUs'));
+const AboutUs = lazy(() => import('./components/AboutUs'));
 
 
 // Plan you app first and then start writing you code
@@ -46,11 +47,18 @@ const AboutUs = lazy(()=> import('./components/AboutUs'));
 
 
 const Applayout = () => {
+  const [user, setUser] = useState({
+    name: "Ankit Khowal",
+    email: "ankitkhowal.nitb@gmail.com"
+  });
+
   return (
     <React.Fragment>
-      <Header />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider value={{ user: user, setUser: setUser}}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </React.Fragment>
   );
 };

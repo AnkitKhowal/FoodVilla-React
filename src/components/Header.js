@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useIsOnline from "../utils/useIsOnline";
 import { LOGO } from "../constants";
+import UserContext from "../utils/UserContext";
 
 const Title = () => {
   return (
@@ -22,13 +23,15 @@ const Title = () => {
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isOnline = useIsOnline();
+  const { user } = useContext(UserContext);
   return (
     <div className="flex justify-between bg-pink-50 shadow-lg">
       <Title />
       <div className="nav-items">
 
         <ul className="flex py-10">
-          <li>Status {isOnline ? '✅' : '🛑'}</li>
+          <span className="px-2 font-bold text-red-900">{user.name}</span>
+          <li className="px-2">Status {isOnline ? '✅' : '🛑'}</li>
           <li className="px-2"><Link to="/">Home</Link></li>
           <li className="px-2"><Link to="/aboutUs">About Us</Link></li>
           <li className="px-2"><Link to="/contactUs">Contact Us</Link></li>
