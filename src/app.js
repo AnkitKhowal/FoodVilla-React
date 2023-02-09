@@ -11,6 +11,8 @@ import Profile from "./components/Profile";
 import Profile from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import store from "./utils/store";
 
 
 //Code Splitting
@@ -54,11 +56,13 @@ const Applayout = () => {
 
   return (
     <React.Fragment>
+      <Provider store={store}>
       <UserContext.Provider value={{ user: user, setUser: setUser}}>
         <Header />
         <Outlet />
         <Footer />
       </UserContext.Provider>
+      </Provider>
     </React.Fragment>
   );
 };
