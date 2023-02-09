@@ -3,10 +3,18 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
 
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
+
 const RestaurantDetail = () => {
 
     const { resId } = useParams();
     const restaurantDetail = useRestaurant(resId);
+
+    const dispatch = useDispatch();
+    const handleOnlick = (item)=>{
+        dispatch(addItem(item));
+    };
 
     return !restaurantDetail ? <Shimmer /> :
         <div className="restaurant-detail m-5">
@@ -19,11 +27,12 @@ const RestaurantDetail = () => {
                     <h3>🌟 {restaurantDetail?.avgRating}</h3>
                     <h3>Cost {restaurantDetail?.costForTwoMsg}</h3>
                 </div>
+                
 
             </div>
             <div className="menu">
                 <ol className="bg-scroll">
-                    {Object.values(restaurantDetail.menu.items).map((element) => <li className="hover:text-pink-900">{element.name}</li>)}
+                    {Object.values(restaurantDetail.menu.items).map((item) => <li className="hover:text-pink-900">{item.name} <button className="p-1 m-2 bg-green-100" onClick={()=>handleOnlick(item)}>Add</button></li>)}
                 </ol>
 
             </div>

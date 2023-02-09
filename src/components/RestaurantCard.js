@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import UserContext from "../utils/UserContext";
+import { IMG_CDN_URL } from "../constants";
 
 const RestaurantCard = (props) => {
     const {user} = useContext(UserContext);
@@ -7,8 +8,7 @@ const RestaurantCard = (props) => {
         <div className="card w-56 p-2 m-2 shadow-lg bg-pink-50  break-normal">
             <img
                 src={
-                    "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/" +
-                    props.cloudinaryImageId
+                    IMG_CDN_URL +props.cloudinaryImageId
                 }
             ></img>
             <h2 className="font-bold text-xl">{props.name}</h2>

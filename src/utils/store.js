@@ -2,8 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cartSlice";
 
 const store = configureStore({
-    // slices
-    cart: cartSlice,
+    reducer: {
+        cart: cartSlice,
+    }
 });
 
 export default store;
@@ -22,6 +23,7 @@ export default store;
  *      initialState
  *      reducers: {
  *          actionName: reducerFunction;
+ *          addItem: (state, action) =>{ state = action.payload}
  *      }
  *  })
  * 

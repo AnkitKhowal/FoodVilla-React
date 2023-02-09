@@ -13,6 +13,7 @@ import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import Cart from "./components/cart";
 
 
 //Code Splitting
@@ -100,6 +101,10 @@ const router = createBrowserRouter([
           <Instamart />
         </Suspense>
       },
+      {
+        path:"/cart",
+        element: <Cart />
+      }
     ]
   },
 ])
