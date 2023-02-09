@@ -4,7 +4,6 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterRestaurant } from "../utils/helper";
 import useRestaurantList from "../utils/useRestaurantList";
-import useIsOnline from "../utils/useIsOnline";
 import UserContext from "../utils/UserContext";
 
 const Body = () => {
@@ -15,7 +14,10 @@ const Body = () => {
 
     const [searchValue, setSearchValue] = useState("");
     const [filteredRestaurantList, setfilteredRestaurantList] = useState([]);
+
     const allRestaurantList  = useRestaurantList(setfilteredRestaurantList);
+
+
     const {user, setUser} = useContext(UserContext);
 
     //Early Return 
@@ -30,7 +32,7 @@ const Body = () => {
                         setSearchValue(event.target.value);
                     }
                 }></input>
-                <button id="search-btn" className= "p-2 m-2 bg-purple-400 text-white rounded-md hover:bg-gray-500" onClick={(event) => {
+                <button data-testid="search-btn" className= "p-2 m-2 bg-purple-400 text-white rounded-md hover:bg-gray-500" onClick={(event) => {
                     const data = filterRestaurant(searchValue, allRestaurantList);
                     setfilteredRestaurantList(data);
                 }
@@ -44,11 +46,11 @@ const Body = () => {
                 (filteredRestaurantList?.length === 0) ? <h1>No Restaurant Found</h1> :
                     filteredRestaurantList?.map((restaurant) => {
                         return (
-                            <Link
+                            <Link data-testid="res-list"
                                 to={"/restaurant/" + restaurant.data.id}
                                 key={restaurant.data.id}
                             >
-                                <RestaurantCard {...restaurant.data}></RestaurantCard>
+                                <RestaurantCard  {...restaurant.data}></RestaurantCard>
                             </Link>
                         )
                     })

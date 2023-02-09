@@ -8,7 +8,7 @@ import ContactUs from "./components/ContactUs";
 import ErrorPage from "./components/ErrorPage";
 import RestaurantDetail from "./components/RestaurantDetail";
 import Profile from "./components/Profile";
-import Profile from "./components/ProfileClass";
+// import Profile from "./components/ProfileClass";
 import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext";
 import { Provider } from "react-redux";

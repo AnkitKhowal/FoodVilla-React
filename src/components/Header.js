@@ -9,6 +9,7 @@ const Title = () => {
   return (
     <a href="/">
       <img
+        data-testid="logo"
         className="h-28 p-2"
         src={LOGO}
         alt="logo"
@@ -36,12 +37,12 @@ const Header = () => {
 
         <ul className="flex py-10">
           <span className="px-2 font-bold text-red-900">{user.name}</span>
-          <li className="px-2">Status {isOnline ? '✅' : '🛑'}</li>
+          <li className="px-2" data-testid="online-statue">Status {isOnline ? '✅' : '🛑'}</li>
           <li className="px-2"><Link to="/">Home</Link></li>
           <li className="px-2"><Link to="/aboutUs">About Us</Link></li>
           <li className="px-2"><Link to="/contactUs">Contact Us</Link></li>
           <li className="px-2"><Link to="/instamart">Instamart</Link></li>
-          <li className="px-2"><Link to="/cart">Cart -{cartItems.length} Items</Link></li>
+          <li className="px-2"><Link to="/cart" data-testid="cart">Cart -{cartItems.length} Items</Link></li>
           {isLoggedIn ? <button className="border bg-green-400" onClick={() => { setIsLoggedIn(false) }}>Log out</button> : <button className="border bg-red-400" onClick={() => setIsLoggedIn(true)}>Log In</button>}
         </ul>
       </div>
